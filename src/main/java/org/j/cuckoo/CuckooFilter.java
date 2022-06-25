@@ -54,8 +54,8 @@ public class CuckooFilter implements Filter {
     /**
      * 基于指纹和indexA计算备用bucket的索引
      */
-    private int backupBucketIndex(Byte fPrint, int indexA) {
-        return (rsHash(Byte.toString(fPrint)) ^ indexA) & (BUCKET_SIZE - 1);
+    private int backupBucketIndex(Byte fPrint, int index) {
+        return (rsHash(Byte.toString(fPrint)) & (BUCKET_SIZE - 1)) ^ index;
     }
 
     /**
