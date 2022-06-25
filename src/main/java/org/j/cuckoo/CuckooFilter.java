@@ -1,7 +1,6 @@
 package cuckoo;
 
 import java.util.Random;
-import java.util.UUID;
 
 public class CuckooFilter implements Filter {
 
@@ -124,24 +123,5 @@ public class CuckooFilter implements Filter {
      */
     private byte fingerprint(String key) {
         return (byte) (rsHash(key) & 0xFF); // 取hashCode后8位
-    }
-
-    public static void main(String[] args) {
-        CuckooFilter filter = new CuckooFilter();
-
-        String uuid = UUID.randomUUID().toString();
-
-        filter.put(uuid);
-
-        for (int i = 0; i < 200; i++) {
-            filter.put(UUID.randomUUID().toString());
-        }
-        filter.put("world");
-
-        System.out.println(filter.contains(uuid));
-        System.out.println(filter.contains("hello"));
-        System.out.println(filter.contains("hello"));
-        System.out.println(filter.contains("world"));
-        System.out.println(filter.contains("world!"));
     }
 }
